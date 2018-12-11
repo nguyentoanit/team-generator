@@ -8,7 +8,7 @@
       </div>-->
       <div class="form-group">
         <label for="file">Teams:</label>
-        <input class="form-control" id="teams" type="number" name="teams" min="2" value="2">
+        <input class="form-control" type="number" min="2" v-model="teamNumber">
       </div>
       <div class="form-group">
         <label for="members">Members:</label>
@@ -20,7 +20,17 @@
       </div>
     </form>
     <br>
-    <div>Result</div>
+    <div>Result:</div>
+    <ul>
+      <li v-for="(team, index) in teams">
+        <div class="group">Team {{index}}</div>
+        <ul>
+          <li v-for="(member, index2) in team.member">
+            <span>{{ member.name }} ({{member.year}})</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -29,23 +39,10 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      file: [],
+      teamNumber: 2,
       content: "K ,1987\nA ,1978",
       members: [],
-      teams: [
-        {
-          totalAge: 0,
-          member: []
-        },
-        {
-          totalAge: 0,
-          member: []
-        },
-        {
-          totalAge: 0,
-          member: []
-        }
-      ]
+      teams: []
     };
   },
   methods: {
@@ -74,6 +71,17 @@ export default {
       return index;
     },
     generate: function() {
+      this.teams = [];
+      this.members = [];
+
+      for (var i = 1; i <= this.teamNumber; i++) {
+        var team = {
+          totalAge: 0,
+          member: []
+        };
+        this.teams.push(team);
+      }
+
       var lines = this.content.split("\n");
       for (var line = 0; line < lines.length; line++) {
         var lineContent = lines[line].split(",");
