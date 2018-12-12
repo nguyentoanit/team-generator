@@ -21,16 +21,16 @@
     </form>
     <br>
     <div>Result:</div>
-    <ul>
-      <li v-for="(team, index) in teams">
-        <div class="group">Team {{index}}</div>
-        <ul>
-          <li v-for="(member, index2) in team.member">
-            <span>{{ member.name }} ({{member.year}})</span>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <div class="result">
+      <div class="row">
+        <div class="col-md-6 team" v-for="(team, index) in teams">
+          <div class="title">Team {{index + 1}}</div>
+          <div class="member">
+            <span v-for="(member, index2) in team.member">{{ member.name }} ({{member.year}})&nbsp;</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -160,4 +160,13 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.result {
+  background-color: #e6faff;
+  padding: 15px;
+}
+
+.member {
+  background-color: #ccf5ff;
+}
+</style>
