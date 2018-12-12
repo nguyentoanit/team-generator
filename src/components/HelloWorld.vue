@@ -23,10 +23,13 @@
     <div>Result:</div>
     <div class="result">
       <div class="row">
-        <div class="col-md-6 team" v-for="(team, index) in teams">
+        <div class="col-md-6 team" v-for="(team, index) in teams" v-bind:key="index">
           <div class="title">Team {{index + 1}}</div>
           <div class="member">
-            <span v-for="(member, index2) in team.member">{{ member.name }} ({{member.year}})&nbsp;</span>
+            <span
+              v-for="(member, index2) in team.member"
+              v-bind:key="index2"
+            >{{ member.name }} ({{member.year}})&nbsp;</span>
           </div>
         </div>
       </div>
